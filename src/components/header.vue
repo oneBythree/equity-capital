@@ -46,6 +46,7 @@ export default {
       this.$emit('click-menu')
     },
     handleItem (index, url) {
+      console.log(this.userInfo)
       // console.log(idx, url)
       if (!this.userInfo && url !== 'home') {
         this.$router.push('login')

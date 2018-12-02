@@ -75,7 +75,7 @@ export default {
     position: absolute;
     display: inline-block;
     left: 50%;
-    bottom: 2.5rem;
+    bottom: 2rem;
     width: 1.6rem;
     height: 1.6rem;
     margin-left: -0.8rem;

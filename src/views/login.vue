@@ -12,7 +12,7 @@
                class="ec-icon-tel">
         </label>
       </div>
-      <div class="form-item ec-border">
+      <div class="form-item ec-border ec-flex-between">
         <input type="text"
                class="code"
                v-model="code"
@@ -181,17 +181,25 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.ec-flex-between {
+  justify-content: space-between;
+}
 .login-wapper {
   position: relative;
   height: 100%;
   width: 100%;
   background: #fff;
   .login-form {
-    padding: 8.35rem 1.5rem 0 1.5rem;
+    padding: 8.35rem 0 0 0;
+    margin: 0 1.5rem;
     .tel,
     .code {
       padding-left: 0.9rem;
       flex: 1;
+      // white-space: nowrap;
+    }
+    .code {
+      max-width: 10rem;
     }
     .ec-icon-tel {
       display: inline-block;
@@ -202,7 +210,8 @@ export default {
       margin-right: 0.8rem;
     }
     .ec-btn-code {
-      display: inline-block;
+      display: block;
+      white-space: nowrap;
       background: #ff3e3e;
       // width: 3.05rem;
       height: 1.25rem;

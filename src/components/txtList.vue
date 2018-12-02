@@ -14,11 +14,11 @@
              alt="公司图片"
              srcset="">
       </div>
-      <div class="center-span">
+      <div class="center-span ellipsis">
         <p class="ellipse2 main-title">
           {{item.title}}
         </p>
-        <p class="ellipse1 content">
+        <p class="ellipsis content">
           {{item.content}}
         </p>
         <p class="date">
@@ -90,6 +90,9 @@ export default {
     handleItem (item) {
       this.$emit('click-item', item)
     }
+  },
+  deactivated () {
+    this.$destroyed()
   }
 
 }

@@ -8,7 +8,7 @@
         <div class="user-info"
              v-if="userInfo">
           <div class="avatar-wrap">
-            <img src="//static.codehuang.com/upload/avatars/default.png">
+            <img :src="img">
             <div class="user-name">杨老妖laoyao</div>
           </div>
         </div>
@@ -51,7 +51,7 @@ export default {
   components: { ecHeader },
   data () {
     return {
-
+      img: require('../assets/images/Oval.png')
     }
   },
   computed: {
@@ -111,8 +111,8 @@ export default {
   flex-direction: column;
   width: 100%;
   height: 30%;
-  background: url("//static.codehuang.com/upload/images/bg.jpg") center/cover
-    no-repeat;
+  background: url("../assets/images/bg.jpg") center no-repeat;
+  background-size: cover;
 
   .avatar-wrap {
     display: flex;

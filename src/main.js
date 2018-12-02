@@ -2,11 +2,12 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
-import router from './router'
 
 import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.min.css'
 import '@/styles/cover.less'
+
+import router from './router'
 
 import DrawerLayout from 'vue-drawer-layout'
 
