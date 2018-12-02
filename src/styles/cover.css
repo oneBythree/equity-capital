@@ -1,0 +1,138 @@
+/* 覆盖mint-ui的primary颜色，改为微信UI的绿色 */
+/*author ypf date 2018-11-30*/
+* {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  margin: 0px;
+  padding: 0px;
+}
+body {
+  background: #eeeeee;
+  font-size: .7rem;
+}
+a {
+  text-decoration: none;
+  color: #111111;
+}
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ellipse3 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+.ellipse2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+.ellipse1 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+}
+li {
+  list-style: none;
+}
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+.clearfix {
+  *zoom: 1;
+}
+.bc-content {
+  padding-top: 2.7rem;
+}
+em.ec-checkbox {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+}
+em.ec-checkbox.checked {
+  background: url("../assets/images/checkbox-checked.png") no-repeat center;
+  background-size: cover;
+}
+em.ec-checkbox.unchecked {
+  background: url("../assets/images/checkbox-un.png") no-repeat center;
+  background-size: cover;
+}
+.form-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 1.85rem;
+  margin: 0 0 0.9rem 0;
+}
+.form-item.ec-border {
+  border: 1px solid #979797;
+}
+.form-item input[type="text"] {
+  margin-left: 1px;
+  border: none;
+}
+.form-item input[type="text"]:focus {
+  outline: none;
+}
+.mint-header {
+  background-color: #FF3E3E;
+}
+.mint-button:not(.is-disabled):active::after {
+  opacity: 0.2 /* .6 */;
+}
+.mint-button--primary {
+  background-color: #FF3E3E;
+}
+.mint-button--primary.is-plain {
+  border: 1px solid #FF3E3E;
+  color: #FF3E3E;
+}
+.mint-badge.is-primary {
+  background-color: #FF3E3E;
+}
+.mint-switch-input:checked + .mint-switch-core {
+  border-color: #FF3E3E;
+  background-color: #FF3E3E;
+}
+.mint-navbar .mint-tab-item.is-selected {
+  border-bottom: 3px solid #FF3E3E;
+  color: #FF3E3E;
+}
+.mint-tabbar > .mint-tab-item.is-selected {
+  color: #FF3E3E;
+}
+.mint-searchbar-cancel {
+  color: #FF3E3E;
+}
+.mint-checkbox-input:checked + .mint-checkbox-core {
+  background-color: #FF3E3E;
+  border-color: #FF3E3E;
+}
+.mint-radio-input:checked + .mint-radio-core {
+  background-color: #FF3E3E;
+  border-color: #FF3E3E;
+}
+.mt-range-progress {
+  background-color: #FF3E3E;
+}
+.mt-progress-progress {
+  background-color: #FF3E3E;
+}
+.mint-msgbox-confirm {
+  color: #FF3E3E;
+}
+.mint-msgbox-confirm:active {
+  color: #FF3E3E;
+}
+.mint-datetime-action {
+  color: #FF3E3E;
+}
