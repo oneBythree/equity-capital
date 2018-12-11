@@ -5,11 +5,11 @@
         :key="index"
         @click="handleImg(item)">
       <div class="wapper">
-        <img :src="item.img"
+        <img :src="item.thumb"
              alt="图像"
              srcset="">
         <p class="name ellipse1">{{item.name}}</p>
-        <p class="sub">{{item.percent}}</p>
+        <p class="sub">{{item.profile}}</p>
       </div>
 
     </li>

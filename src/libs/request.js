@@ -18,7 +18,8 @@ axios.interceptors.request.use(config => {
 // 添加响应拦截器
 axios.interceptors.response.use(
   response => {
-    if (response.data.code === '200') { // 服务端定义的响应code码为0时请求成功
+    // console.log(response.data.code)
+    if (response.data.code === '200' || response.data.code === 1) { // 服务端定义的响应code码为0时请求成功
       return Promise.resolve(response.data) // 使用Promise.resolve 正常响应
     } else if (response.data.code === 1401) { // 服务端定义的响应code码为1401时为未登录
       // store.dispatch('setUserInfo', {})
@@ -42,9 +43,16 @@ axios.interceptors.response.use(
     return Promise.reject(error)
   }
 )
-export default function request (method, url, data) { // 暴露 request 给我们好API 管理
+export default function request (method, url, data, dev) { // 暴露 request 给我们好API 管理
+  if (dev === 'prod') {
+    axios.defaults.baseURL = 'http://148.70.56.228/index.php'
+  } else {
+    axios.defaults.baseURL = ''
+  }
+
   method = method.toLocaleLowerCase() // 封装RESTful API的各种请求方式 以 post get delete为例
   if (method === 'post') {
+    // console.log(data)
     return axios.post(url, data) // axios的post 默认转化为json格式
   } else if (method === 'get') {
     return axios.get(url, {

@@ -10,6 +10,7 @@ import '@/styles/cover.less'
 import router from './router'
 
 import DrawerLayout from 'vue-drawer-layout'
+import VueScroller from 'vue-scroller'
 
 // 移动端高清屏适配方案
 import '@/libs/rem.js'
@@ -19,6 +20,7 @@ import store from './store'
 
 Vue.use(MintUI)
 Vue.use(DrawerLayout)
+Vue.use(VueScroller)
 
 Vue.config.productionTip = false
 

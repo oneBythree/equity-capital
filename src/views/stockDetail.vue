@@ -32,6 +32,7 @@ import ecBox from '../components/box.vue'
 
 // mock测试数据
 import { detail } from '@/mock/list.js'
+import { requestRead } from '@/api'
 export default {
   name: 'stock-detail',
   components: { ecBox },
@@ -39,6 +40,22 @@ export default {
     return {
       data: detail
     }
+  },
+  created () {
+    // console.log(this.$route.params.id)
+    //  文章id
+    const cid = this.$route.params.id
+    const params = {
+      debug: 1,
+      uid: 196,
+      cid
+    }
+    requestRead(params)
+      .then((result) => {
+
+      }).catch((err) => {
+        console.log(err)
+      })
   }
 }
 </script>
@@ -55,6 +72,7 @@ export default {
     .usr-info {
       display: block;
       width: 3rem;
+      text-align: center;
       img {
         display: inline-block;
         width: 3rem;

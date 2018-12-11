@@ -25,8 +25,13 @@
 </template>
 
 <script>
+// 工具包
+// import { isEmptyObject } from '@/libs/tools.js'
 
 import { mapGetters } from 'vuex'
+
+// 工具包
+import { getUserInfo } from '@/libs/auth.js'
 export default {
   name: 'ec-header',
   data () {
@@ -35,7 +40,10 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['userInfo'])
+    ...mapGetters(['userInfo']),
+    userInfo () {
+      return getUserInfo() ? JSON.parse(getUserInfo()) : ''
+    }
   },
   created () {
     // console.log(this.$route.meta)
@@ -46,8 +54,6 @@ export default {
       this.$emit('click-menu')
     },
     handleItem (index, url) {
-      console.log(this.userInfo)
-      // console.log(idx, url)
       if (!this.userInfo && url !== 'home') {
         this.$router.push('login')
       } else {

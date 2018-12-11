@@ -1,6 +1,7 @@
 <template>
   <vue-drawer-layout ref="drawerLayout"
                      @mask-click="drawerToggle"
+                     :enable="false"
                      :content-drawable="true">
     <div class="drawer"
          slot="drawer">
@@ -8,8 +9,10 @@
         <div class="user-info"
              v-if="userInfo">
           <div class="avatar-wrap">
-            <img :src="img">
-            <div class="user-name">杨老妖laoyao</div>
+            <img :src="userInfo.avatar">
+            <div class="user-name">
+              {{userInfo.true_name ? userInfo.true_name : userInfo.iphone}}
+            </div>
           </div>
         </div>
         <div class="login-btn"
@@ -22,9 +25,15 @@
       <ul class="menu-item-list">
         <li class="item-link"
             @click="clickLink('about')">公司简介</li>
+
         <li class="item-link"
+            v-if="userInfo"
             @click="clickLink('analyst_list')">分析师</li>
         <li class="item-link"
+            v-if="userInfo.isvip == 0"
+            @click="linkRegister">会员申请</li>
+        <li class="item-link"
+            v-if="userInfo"
             @click="showModal">退出登录</li>
       </ul>
     </div>
@@ -45,6 +54,9 @@ import ecHeader from '../components/header.vue'
 
 import { MessageBox } from 'mint-ui'
 
+// 工具包
+import { getUserInfo } from '@/libs/auth.js'
+
 import { mapGetters } from 'vuex'
 export default {
   name: 'ec-layout',
@@ -52,19 +64,25 @@ export default {
   data () {
     return {
       img: require('../assets/images/Oval.png')
+      // userInfo: getUserInfo()
     }
   },
   computed: {
-    ...mapGetters(['userInfo'])
+    ...mapGetters(['userInfo']),
+    userInfo () {
+      return getUserInfo() ? JSON.parse(getUserInfo()) : ''
+    }
   },
   mounted () {
-
+    console.log(this.userInfo)
+    // console.log(this.userInfo)
   },
   methods: {
     drawerToggle () {
       this.$refs.drawerLayout.toggle()
     },
     handleClick (data) {
+
       // const { url, index } = data
       // if (!this.userInfo && url !== 'home') {
       //   this.$router.push('login')
@@ -77,19 +95,25 @@ export default {
       this.$refs.drawerLayout.toggle()
       setTimeout(() => {
         this.$router.push(url)
-      }, 200)
+      })
     },
     linkLogin () {
       this.$refs.drawerLayout.toggle()
       setTimeout(() => {
         this.$router.push('login')
-      }, 200)
+      })
+    },
+    linkRegister () {
+      this.$refs.drawerLayout.toggle()
+      setTimeout(() => {
+        this.$router.push('register')
+      })
     },
     showModal () {
       MessageBox.confirm('确定执行此操作?')
         .then(action => {
           this.$store.commit('clearUserInfo')
-          this.clickLink('home')
+          this.clickLink('/homexx')
         }).catch(cancel => {
           // console.log('cancel')
         })
@@ -129,6 +153,8 @@ export default {
       margin-right: 0.7rem;
     }
     .user-name {
+      display: inline-flex;
+      align-items: center;
       font-size: 1.4rem;
       color: #fff;
     }

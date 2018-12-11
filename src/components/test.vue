@@ -30,13 +30,35 @@ import ecImgList from '../components/imgList.vue'
 
 // mock测试数据
 import { list, imgList } from '@/mock/list.js'
+
+import { requestAnalystList } from '@/api'
 export default {
   name: '',
   components: { ecTxtList, ecBadgeTitle, ecImgList },
   data () {
     return {
       listData: list,
-      imgList
+      imgList: []
+    }
+  },
+  created () {
+    this.init()
+  },
+  methods: {
+    init () {
+      this.getData()
+      requestAnalystList({ debug: 1, uid: 196, unpage: '0' })
+        .then((result) => {
+          this.imgList = result.data
+        }).catch((err) => {
+          console.log(err)
+        })
+    },
+    /**
+     * 获取数据
+     */
+    getData () {
+
     }
   }
 }

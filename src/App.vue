@@ -38,4 +38,28 @@ body {
   // text-align: center;
   /*background-color: #eee*/
 }
+
+.ellipse3 {
+  display: -webkit-box;
+  box-orient: vertical;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.ellipse2 {
+  display: -webkit-box;
+  box-orient: vertical;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.ellipse1 {
+  display: -webkit-box;
+  box-orient: vertical;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+}
 </style>
