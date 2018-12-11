@@ -74,6 +74,13 @@ const getters = {
       token = localStorage.getItem('token') || null
     }
     return token
+  },
+  uid (state) {
+    let uid = state.uid
+    if (!uid) {
+      uid = localStorage.getItem('uid') || null
+    }
+    return uid
   }
 }
 

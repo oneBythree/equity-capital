@@ -59,14 +59,19 @@ export default {
   },
   methods: {
     getData () {
-      requestAnalystList({ debug: 1, uid: 196, unpage: '0' })
+      const { token, uid } = this
+      // { token, uid, unpage: '0' }
+      let data = token ? { debug: 1, unpage: '0' } : { unpage: '0' }
+      // console.log(this.token, this.uid)
+      // if (!token)
+      requestAnalystList(data)
         .then((result) => {
           this.imgList = result.data
         }).catch((err) => {
           console.log(err)
         })
 
-      requestDaliyBroadCast({ debug: 1, uid: 196, unpage: '0' })
+      requestDaliyBroadCast(data)
         .then((result) => {
           this.listData = result.data
         }).catch((err) => {

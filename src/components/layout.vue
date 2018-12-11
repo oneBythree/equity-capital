@@ -74,7 +74,7 @@ export default {
     }
   },
   mounted () {
-    console.log(this.userInfo)
+    // console.log(this.userInfo)
     // console.log(this.userInfo)
   },
   methods: {

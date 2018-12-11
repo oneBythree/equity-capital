@@ -4,7 +4,7 @@ import { throwErr } from './throwErr' // utils 捕捉服务端http状态码的�
 import { Toast } from 'mint-ui' // mint Toast的提示
 // import router from '@/router'
 
-// axios.defaults.baseURL = 'http://148.70.56.228/index.php'
+axios.defaults.baseURL = 'http://148.70.56.228/index.php'
 
 // 过滤请求
 axios.interceptors.request.use(config => {
@@ -44,11 +44,11 @@ axios.interceptors.response.use(
   }
 )
 export default function request (method, url, data, dev) { // 暴露 request 给我们好API 管理
-  if (dev === 'prod') {
-    axios.defaults.baseURL = 'http://148.70.56.228/index.php'
-  } else {
-    axios.defaults.baseURL = ''
-  }
+  // if (dev === 'prod') {
+  //   axios.defaults.baseURL = 'http://148.70.56.228/index.php'
+  // } else {
+  //   axios.defaults.baseURL = ''
+  // }
 
   method = method.toLocaleLowerCase() // 封装RESTful API的各种请求方式 以 post get delete为例
   if (method === 'post') {
