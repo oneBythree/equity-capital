@@ -1,5 +1,5 @@
 <template>
-  <ec-box>
+  <ec-box v-show="show">
 
     <ec-badge-title icon-txt="播"
                     text="日常播报">
@@ -15,7 +15,8 @@
                     text="Top推荐">
     </ec-badge-title>
 
-    <ec-img-list :img-list="imgList">
+    <ec-img-list :img-list="imgList"
+                 @click-img="linkImg">
     </ec-img-list>
 
   </ec-box>
@@ -32,7 +33,8 @@ import ecTxtList from '../components/xlList.vue'
 
 // img列表组件
 import ecImgList from '../components/imgList.vue'
-
+/* eslint-disable */
+import { Indicator } from 'mint-ui';
 // mock测试数据
 // import { list, imgList } from '@/mock/list.js'
 
@@ -44,11 +46,13 @@ export default {
   components: { ecBox, ecTxtList, ecBadgeTitle, ecImgList },
   data () {
     return {
+      show: false,
       pos: 'left',
       tran: 'push',
-
       listData: [],
-      imgList: []
+      imgList: [],
+      nUserInfo: null,
+      isFist: true
     }
   },
   computed: {
@@ -59,23 +63,54 @@ export default {
   },
   methods: {
     getData () {
-      requestAnalystList({ debug: 1, uid: 196, unpage: '0' })
+      Indicator.open('加载中...');
+      const { token, uid } = this;
+      let data = {}
+      if (token && uid) {
+        // data = { token, uid, unpage: '0' }
+        // data = { debug: 1, unpage: '0', uid: 196 }
+        data = { token, unpage: '0', uid }
+      } else {
+        // data = { debug: 1, unpage: '0', uid: 196 }
+        data = { unpage: '0' }
+      }
+
+      requestDaliyBroadCast(data)
         .then((result) => {
-          this.imgList = result.data
+          this.listData = result.data
+          setTimeout(() => {
+            this.show = true;
+            Indicator.close();
+          }, 500)
         }).catch((err) => {
+          Indicator.close();
           console.log(err)
         })
 
-      requestDaliyBroadCast({ debug: 1, uid: 196, unpage: '0' })
+      requestAnalystList(data)
         .then((result) => {
-          this.listData = result.data
+          this.imgList = result.data
+
         }).catch((err) => {
           console.log(err)
+          Indicator.close();
         })
+
+
     },
     // 点击单个图文
     clickTxt (item) {
-      console.log(item)
+      this.$router.push({
+        path: `stock_detail/${item.id}`
+      })
+
+      // console.log(item)
+    },
+    // 点击分析师详情
+    linkImg (item) {
+      this.$router.push({
+        path: `analyst/${item.id}`
+      })
     }
   }
 }

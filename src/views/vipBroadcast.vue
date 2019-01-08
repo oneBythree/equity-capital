@@ -1,7 +1,8 @@
 <template>
-  <scroller :on-infinite="infinite"
+  <scroller :on-infinite="vipInfinite"
+            v-show="show"
             ref="my_scroller">
-    <div style="height: 2.7rem;"></div>
+    <div style="height: 1.28rem;"></div>
     <ec-badge-title icon-txt="播"
                     text="会员播报">
     </ec-badge-title>
@@ -26,31 +27,53 @@ import ecTxtList from '../components/xlList.vue'
 // mock测试数据
 // import { viplist } from '@/mock/list.js'
 import { requestVipBroadCast } from '@/api'
+
+import { mapGetters } from 'vuex'
+/* eslint-disable */
+import { Indicator } from 'mint-ui';
 export default {
   name: 'vip-broadcast',
   components: { ecBox, ecBadgeTitle, ecTxtList },
   data () {
     return {
+      show: false,
+      // vipInfinite: undefined,
       listData: []
     }
   },
+  computed: {
+    ...mapGetters(['token', 'uid'])
+  },
   created () {
-    requestVipBroadCast({ debug: 1, uid: 196 })
+    Indicator.open('加载中...');
+    const params = {
+      uid: this.uid,
+      token: this.token
+    }
+    requestVipBroadCast(params)
       .then((result) => {
+        setTimeout(() => {
+          this.show = true
+          Indicator.close()
+        }, 500)
         // console.log(result.data)
         this.listData = result.data
       }).catch((err) => {
+        this.show = true;
+        Indicator.close()
+        this.$router.replace('register')
         console.log(err)
       })
   },
   methods: {
     clickTxt (item) {
       this.$router.push({
-        path: `stock_detail/${item.id}`
+        path: `stock_detail/${item.id}`,
+        query: { type: 'vip' }
       })
     },
-    infinite () {
-      this.infinite = undefined
+    vipInfinite () {
+      this.vipInfinite = undefined
     }
   }
 }

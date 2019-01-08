@@ -45,12 +45,52 @@ const whiteRoutes = [
         name: 'home',
         component: resolve => require(['@/views/home.vue'], resolve)
       },
-      // 公司简介
+      // 技术分析
+      {
+        path: 'technology',
+        meta: {
+          isBack: true,
+          title: '关于技术分析'
+        },
+        name: 'technology',
+        component: resolve => require(['@/views/technology.vue'], resolve)
+      },
+      // 关于策略略
+      {
+        path: 'strategy',
+        meta: {
+          isBack: true,
+          title: '关于策略'
+        },
+        name: 'strategy',
+        component: resolve => require(['@/views/strategy.vue'], resolve)
+      },
+      // 特别提示
+      {
+        path: 'notice',
+        meta: {
+          isBack: true,
+          title: '特别提示'
+        },
+        name: 'notice',
+        component: resolve => require(['@/views/notice.vue'], resolve)
+      },
+      // 关于信念
+      {
+        path: 'convictions',
+        meta: {
+          isBack: true,
+          title: '关于信念'
+        },
+        name: 'convictions',
+        component: resolve => require(['@/views/convictions.vue'], resolve)
+      },
+      // 关于我们
       {
         path: 'about',
         meta: {
           isBack: true,
-          title: '公司简介'
+          title: '关于我们'
         },
         name: 'about',
         component: resolve => require(['@/views/about.vue'], resolve)
@@ -64,19 +104,19 @@ const adminRoutes = [{
   name: '',
   component: Layout,
   children: [{
-    path: 'audio_broadcast',
+    path: '/audio_broadcast',
     name: 'audio_broadcast',
     component: resolve => require(['@/views/audioBroadcast.vue'], resolve)
   },
     // vip播报
   {
-    path: 'vip_broadcast',
+    path: '/vip_broadcast',
     name: 'vip_broadcast',
     component: resolve => require(['@/views/vipBroadcast.vue'], resolve)
   },
     // 个股详情
   {
-    path: 'stock_detail/:id',
+    path: '/stock_detail/:id',
     meta: {
       isBack: true,
       title: '个股详情'
@@ -85,7 +125,7 @@ const adminRoutes = [{
     component: resolve => require(['@/views/stockDetail.vue'], resolve)
   },
   {
-    path: 'analyst_list',
+    path: '/analyst_list',
     meta: {
       isBack: true,
       title: '分析师列表'
@@ -95,7 +135,7 @@ const adminRoutes = [{
   },
     // 分析师简介
   {
-    path: 'analyst/:id',
+    path: '/analyst/:id',
     meta: {
       isBack: true,
       title: '分析师简介'
@@ -103,6 +143,7 @@ const adminRoutes = [{
     name: 'analyst',
     component: resolve => require(['@/views/analystDetail.vue'], resolve)
   }
+
   ]
 }]
 

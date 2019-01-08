@@ -1,5 +1,5 @@
 <template>
-  <ul class="ec-list">
+  <ul :class="['ec-list',dype === 'analyst' ? 'analyst' : '']">
     <li class="item-wapper"
         v-for="(item,key) in listData"
         :key="key"
@@ -7,11 +7,11 @@
         @click="handleItem(item)">
       <div class="left-span"
            v-if="isLeftIcon ">
-        <em :class="item.isread | formatStatus"></em>
+        <em :class="formatStatus(item.isread,item.type)"></em>
       </div>
       <div class="img-span"
-           v-if="isImg && item.videourl">
-        <img :src="item.videourl"
+           v-if="isImg && (item.logo || item.thumb)">
+        <img :src="item.logo || item.thumb"
              alt="公司图片"
              srcset="">
       </div>
@@ -19,15 +19,15 @@
         <p class="ellipse2 main-title">
           {{item.title}}
         </p>
-        <p class="ellipse1 content">
-          {{item.content}}
-        </p>
-        <p class="date">
-          {{item.createtime}}
-        </p>
+        <div class="ellipse1 content">
+          {{item.content | filterHTMLTag}}
+        </div>
+        <!-- <p class="date">
+          {{item.createtime }}
+        </p> -->
       </div>
       <div class="span-right"
-           v-if="isRightIcon && item.isBuy>0">
+           v-if="isRightIcon && item.sale>0">
         <em :class="item.isBuy | formatBuy"></em>
       </div>
     </li>
@@ -62,31 +62,57 @@ export default {
       type: Array,
       required: true,
       default: () => []
+    },
+    dype: {
+      type: String,
+      required: false,
+      default: 'dialy'
     }
   },
   filters: {
-    // 状态图标样式
-    formatStatus (value) {
-      // console.log(value)
-      if (value === 2) {
-        return 'ec-icon-status unlook'
-      } else if (value === 1) {
-        return 'ec-icon-status top'
+    formatTime (value) {
+      if (value) {
+        var timeArr = value.split('-')
+        // console.log(timeArr)
+        if (timeArr.length > 0) {
+          return `${timeArr[1]}-${timeArr[1]}`
+        } else {
+          return value
+        }
       } else {
-        return 'ec-icon-status new'
+        return value
       }
     },
+    // 状态图标样式
+    // formatStatus (value, type) {
+    //   if (value === 2) {
+    //     return 'ec-icon-status top'
+    //   } else if (value === 1) {
+    //     return 'ec-icon-status unlook'
+    //   } else {
+    //     return 'ec-icon-status new'
+    //   }
+    // },
     formatBuy (value) {
       if (value === '1') {
         return 'ec-icon-bug come'
       } else {
         return 'ec-icon-bug sale'
       }
+    },
+    filterHTMLTag (msg) {
+      let _msg = msg.replace(/<\/?[^>]*>/g, '') // 去除HTML Tag
+      _msg = _msg.replace(/[|]*\n/, '') // 去除行尾空格
+      _msg = _msg.replace(/&npsp;/ig, '') // 去掉npsp
+      // console.log('----------------')
+      // console.log(_msg)
+      // console.log('----------------')
+      return _msg
     }
   },
   data () {
     return {
-
+      ddpyt: this.dype
     }
   },
   created () {
@@ -96,6 +122,25 @@ export default {
     // 点击单个列表
     handleItem (item) {
       this.$emit('click-item', item)
+    },
+    formatStatus (value, type) {
+      // console.log(value, type)
+      // console.log(value, type)
+      if (type === '2') {
+        if (value === 2) {
+          return 'ec-icon-status top'
+        } else if (value === 1) {
+          return 'ec-icon-status unlook'
+        } else {
+          return 'ec-icon-status new'
+        }
+      } else {
+        if (value === 0) {
+          return 'ec-icon-status new'
+        } else {
+          return 'ec-icon-status unlook'
+        }
+      }
     }
   }
 }
@@ -105,8 +150,8 @@ export default {
 // 状态图标样式
 .ec-icon-status {
   display: inline-block;
-  width: 1.4rem;
-  height: 0.75rem;
+  width: 0.746667rem;
+  height: 0.4rem;
   &.new {
     background: url("../assets/images/new.png") center no-repeat;
     background-size: 100%;
@@ -124,8 +169,8 @@ export default {
 //是否买进icon图标样式
 .ec-icon-bug {
   display: inline-block;
-  width: 0.95rem;
-  height: 1.85rem;
+  width: 0.506667rem;
+  height: 0.96rem;
   &.come {
     background: url("../assets/images/bug.png") center no-repeat;
     background-size: cover;
@@ -139,55 +184,101 @@ export default {
 //图文详情样式
 ul.ec-list {
   background: #fff;
-  padding: 0 0.8rem;
+  padding: 0 0.426667rem;
+  font-size: 0.373333rem;
+  color: #404040;
+  &.analyst {
+    // padding: 0;
+    background: none;
+    li.item-wapper {
+      position: relative;
+      // background: #fff;
+      // padding-top: 0;
+      // &::after {
+      //   content: "";
+      //   position: absolute;
+      //   left: 2.666667rem;
+      //   right: 0;
+      //   top: 0;
+      //   bottom: 0;
+      //   background: #fff;
+      //   height: 0.266667rem;
+      // }
+      .span-point {
+        font-size: 0.64rem;
+        height: 0.933333rem;
+        margin-right: 0.133333rem;
+        background: #eeeeee;
+      }
+      div.img-span {
+        // padding-top: 0.266667rem;
+        margin-left: 0;
+        padding-left: 0.133333rem;
+        background: #fff;
+      }
+      div.center-span {
+        // padding-top: 0.266667rem;
+        background: #fff;
+        margin-left: 0;
+        padding-left: 0.266667rem;
+        // padding-bottom: 0.266667rem;
+      }
+      // background: #fff;
+      // padding: 0 0.266667rem;
+    }
+  }
   li.item-no-data {
-    height: 2.7rem;
-    line-height: 2.7rem;
+    height: 1.493333rem;
+    line-height: 1.493333rem;
     text-align: center;
   }
   li.item-wapper {
-    padding-top: 0.5rem;
+    padding-top: 0.266667rem;
     display: flex;
     align-items: flex-start;
+    &:last-of-type {
+      padding-bottom: 0.266667rem;
+    }
     // justify-content: flex-start;
     div.left-span {
       display: inline-flex;
       .ec-icon-new {
         // margin-top: -0.2rem;
         vertical-align: top;
-        margin-top: -0.3rem;
+        margin-top: -0.16rem;
       }
     }
     div.img-span {
-      width: 1.75rem;
-      margin-left: 0.5rem;
+      width: 0.933333rem;
+      margin-left: 0.266667rem;
       display: inline-flex;
       img {
-        width: 1.75rem;
-        height: 1.75rem;
+        width: 0.933333rem;
+        height: 0.933333rem;
         vertical-align: top;
       }
     }
     div.center-span {
-      margin-left: 0.5rem;
+      margin-left: 0.266667rem;
       flex: 1;
       display: block;
       word-wrap: break-word;
-      color: #111111;
+      // color: #111111;
       .main-title {
-        line-height: 1rem;
+        line-height: 0.586667rem;
       }
       .content {
-        line-height: 1rem;
+        line-height: 0.64rem;
       }
       .date {
-        font-size: 0.6rem;
+        margin-top: 0.133333rem;
+        font-size: 0.32rem;
         // margin-top: 0.2rem;
         color: #828282;
       }
     }
     div.span-right {
-      margin-left: 0.5rem;
+      margin-left: 0.266667rem;
     }
   }
 }

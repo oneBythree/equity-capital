@@ -7,7 +7,8 @@ import Cookie from 'js-cookie'
 const state = {
   userInfo: {},
   token: '',
-  uid: ''
+  uid: '',
+  navbarTitle: '' // navbar 名称
 }
 
 const mutations = {
@@ -55,6 +56,14 @@ const mutations = {
     this.commit('clearUserInfo')
     this.commit('removeToken')
     this.commit('removeUid')
+  },
+  // 添加navBar title
+  addNavbarTitle (state, title) {
+    state.navbarTitle = title
+  },
+  // 清除navBar title
+  clearNavbarTitle (state) {
+    state.navbarTitle = ''
   }
 }
 
@@ -81,7 +90,8 @@ const getters = {
       uid = localStorage.getItem('uid') || null
     }
     return uid
-  }
+  },
+  navbarTitle: (state) => state.navbarTitle
 }
 
 export default {

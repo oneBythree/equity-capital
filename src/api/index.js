@@ -10,6 +10,15 @@ export const requestLogin = (params) => {
 }
 
 /**
+ * 短信登录
+ * @param {*} params
+ */
+export const requestUserInfo = (params) => {
+  // console.log(params)
+  return request('get', '/CusApi/customer', params, 'prod') // 登陆管理员获取自身信息
+}
+
+/**
  * 发送验证码
  * @param {*}params
  */
@@ -22,7 +31,7 @@ export const requestMsgCode = (params) => {
  * @param {*} params
  */
 export const requestRegister = (params) => {
-  return request('get', '/CusApi/register', params, 'prod')
+  return request('get', '/CusApi/apply', params, 'prod')
 }
 
 /**
@@ -39,6 +48,14 @@ export const requestGetUserInfo = (params) => {
  */
 export const requestDaliyBroadCast = (params) => {
   return request('get', '/CusApi/dayliy', params, 'prod')
+}
+
+/**
+ * 日常播报详情接口
+ * @param {*} params
+ */
+export const requestBroadDetail = (params) => {
+  return request('get', '/CusApi/contentDetail', params, 'prod')
 }
 
 /**
@@ -63,6 +80,14 @@ export const requestVidoBroadCast = (params) => {
  */
 export const requestAnalystList = (params) => {
   return request('get', '/CusApi/fxs', params, 'prod')
+}
+
+/**
+ * 分析列表
+ * @param {*} params
+ */
+export const requestAnalystDetail = (params) => {
+  return request('get', '/CusApi/fxsDetail', params, 'prod')
 }
 
 /**

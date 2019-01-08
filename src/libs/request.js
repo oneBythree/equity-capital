@@ -4,7 +4,14 @@ import { throwErr } from './throwErr' // utils 捕捉服务端http状态码的�
 import { Toast } from 'mint-ui' // mint Toast的提示
 // import router from '@/router'
 
-axios.defaults.baseURL = 'http://148.70.56.228/index.php'
+axios.defaults.withCredentials = true
+// axios.defaults.baseURL = 'http://148.70.56.228/index.php'
+// http://back.williamview.com/'http://back.williamview.com/index.php'
+// console.log(process.env.API_HOST.toString().indexOf('http'))
+// const host = process.env.API_HOST.toString().includes('http') ? 'http://localhost:8080' : process.env.API_HOST
+axios.defaults.baseURL = `${process.env.API_HOST}gupiao/index.php`
+
+// console.log(host)
 
 // 过滤请求
 axios.interceptors.request.use(config => {

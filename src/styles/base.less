@@ -1,16 +1,25 @@
 /*author ypf date 2018-11-30*/
 @color-primary: #FF3E3E;
-
+html {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  /* 解决IOS默认滑动很卡的情况 */
+  -webkit-overflow-scrolling : touch;
+    height: 100%;
+    width: 100%;
+}
 
 * {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   margin: 0px;
   padding: 0px;
+  -webkit-overflow-scrolling: touch;
 }
 
 body {
   background: #eeeeee;
-  font-size: .7rem;
+  font-size: .373333rem;
+  color: #404040;
   font-family: "PingFangSC-Regular", sans-serif;
 }
 
@@ -44,5 +53,50 @@ li {
 }
 
 .bc-content{
-  padding-top: 2.7rem;
+  padding-top:1.28rem;
 }
+
+div.txt img {
+  width: 100% !important;
+  // max-width: 8rem;
+  margin-top: .133333rem;
+  height: auto!important;
+  vertical-align: top;
+}
+
+
+.mbc-txt-wapper {
+  // position: fixed;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  .content {
+    padding: .533333rem .224rem;
+    letter-spacing: 0.2px;
+    overflow: visible;
+    text-align: justify;
+    word-break: break-word;
+    word-wrap: break-word;
+    line-height:.64rem;
+    background: #fff;
+    strong {
+      display: inline-block;
+      margin-bottom: .32rem;
+    }
+    img {
+      width: 100%;
+      height: auto;
+      vertical-align: top;
+      margin:.32rem 0;
+    }
+  }
+
+  color: #404040;
+  font-size: .373333rem;
+  line-height: .64rem;
+}
+
+.eq-bgfff{
+  background: #fff;
+}
+

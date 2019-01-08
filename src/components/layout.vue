@@ -23,8 +23,6 @@
         </div>
       </div>
       <ul class="menu-item-list">
-        <li class="item-link"
-            @click="clickLink('about')">公司简介</li>
 
         <li class="item-link"
             v-if="userInfo"
@@ -33,6 +31,16 @@
             v-if="userInfo.isvip == 0"
             @click="linkRegister">会员申请</li>
         <li class="item-link"
+            @click="clickLink('technology')">关于技术分析</li>
+        <li class="item-link"
+            @click="clickLink('strategy')">关于策略 </li>
+        <li class="item-link"
+            @click="clickLink('notice')">特别提示</li>
+        <li class="item-link"
+            @click="clickLink('about')">关于我们</li>
+        <li class="item-link"
+            @click="clickLink('convictions')">关于信念</li>
+        <li class="item-link"
             v-if="userInfo"
             @click="showModal">退出登录</li>
       </ul>
@@ -40,6 +48,7 @@
     <div class="ec-content"
          slot="content">
       <ec-header @click-menu="drawerToggle"
+                 :title="title"
                  @handle-link="handleClick">
       </ec-header>
       <router-view></router-view>
@@ -58,22 +67,47 @@ import { MessageBox } from 'mint-ui'
 import { getUserInfo } from '@/libs/auth.js'
 
 import { mapGetters } from 'vuex'
+
+import { requestUserInfo } from '@/api'
 export default {
   name: 'ec-layout',
   components: { ecHeader },
   data () {
     return {
-      img: require('../assets/images/Oval.png')
+      img: require('../assets/images/Oval.png'),
+      nUserInfo: {},
+      isFist: true,
+      title: ''
       // userInfo: getUserInfo()
     }
   },
   computed: {
-    ...mapGetters(['userInfo']),
+    ...mapGetters(['userInfo', 'token', 'uid']),
     userInfo () {
       return getUserInfo() ? JSON.parse(getUserInfo()) : ''
     }
   },
+  watch: {
+    // '$route' (cur) {
+    //   if(cur.meta.title === '个股详情'){
+
+    //   }
+    //   // console.log(cur)
+    // }
+  },
   mounted () {
+    // console.log(this.isFist)
+
+    if (this.token && this.isFist) {
+      const data = { token: this.token, uid: this.uid }
+      requestUserInfo(data)
+        .then((result) => {
+          this.nUserInfo = result.data
+          this.isFist = false
+        }).catch((err) => {
+          console.log(err)
+        })
+    }
     // console.log(this.userInfo)
     // console.log(this.userInfo)
   },
@@ -82,14 +116,19 @@ export default {
       this.$refs.drawerLayout.toggle()
     },
     handleClick (data) {
-
-      // const { url, index } = data
-      // if (!this.userInfo && url !== 'home') {
-      //   this.$router.push('login')
+      // console.log(data)
+      // const { url } = data
+      // if (this.nUserInfo.hasOwnProperty('isvip') && this.nUserInfo.isvip === '1') {
+      //   if (url === 'home') {
+      //     this.$router.push('home')
+      //   } else {
+      //     this.$router.push(url)
+      //   }
       // } else {
-      //   this.$router.push(url)
+      //   this.$router.push({
+      //     path: `register`
+      //   })
       // }
-      // console.log(url)
     },
     clickLink (url) {
       this.$refs.drawerLayout.toggle()
@@ -141,41 +180,41 @@ export default {
   .avatar-wrap {
     display: flex;
     align-self: center;
-    padding: 0 1rem 1rem 1rem;
+    padding: 0 0.533333rem 0.533333rem 0.533333rem;
     // justify-content: center;
     // width: 100%;
     img {
       display: inline-block;
-      width: 2.3rem;
-      height: 2.3rem;
+      width: 1.226667rem;
+      height: 1.226667rem;
       border: 3px solid #fff;
       border-radius: 50%;
-      margin-right: 0.7rem;
+      margin-right: 0.373333rem;
     }
     .user-name {
       display: inline-flex;
       align-items: center;
-      font-size: 1.4rem;
+      font-size: 0.746667rem;
       color: #fff;
     }
   }
   .login-btn {
     display: flex;
     align-items: center;
-    padding: 0 1rem 1rem 1rem;
+    padding: 0 0.533333rem 0.533333rem 0.533333rem;
     span.img {
       display: inline-block;
-      width: 2.3rem;
-      height: 2.3rem;
+      width: 1.226667rem;
+      height: 1.226667rem;
       background: url("../assets/images/default-img.png") no-repeat center;
       background-size: cover;
       border: 3px solid #fff;
       border-radius: 50%;
-      margin-right: 0.7rem;
+      margin-right: 0.373333rem;
     }
     .ec-login-btn {
       display: inline-block;
-      padding: 0.5rem 1rem;
+      padding: 0.266667rem 0.533333rem;
       border: 1px solid #fff;
       color: #fff;
       border-radius: 0.1rem;
@@ -185,10 +224,10 @@ export default {
 
 .menu-item-list {
   li.item-link {
-    height: 2.5rem;
-    line-height: 2.5rem;
-    padding-left: 1.25rem;
-    font-size: 0.8rem;
+    height: 1.333333rem;
+    line-height: 1.333333rem;
+    padding-left: 0.666667rem;
+    font-size: 0.426667rem;
   }
 }
 

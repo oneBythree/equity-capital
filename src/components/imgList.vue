@@ -9,7 +9,7 @@
              alt="图像"
              srcset="">
         <p class="name ellipse1">{{item.name}}</p>
-        <p class="sub">{{item.profile}}</p>
+        <p class="sub">{{item.profile}}%</p>
       </div>
 
     </li>
@@ -44,6 +44,7 @@ export default {
 .ec-img-list {
   background: #fff;
   padding-bottom: 1rem;
+  font-size: 0.373333rem;
   .item-img-wapper {
     display: inline-flex;
     align-items: center;
@@ -52,19 +53,19 @@ export default {
     width: 33.333%;
     flex-direction: column;
     div.wapper {
-      padding: 0 0.5rem;
+      padding: 0 0.266667rem;
       text-align: center;
       img {
         display: inline-block;
         vertical-align: top;
-        width: 3.75rem;
-        height: 3.75rem;
+        width: 1.733333rem;
+        height: 1.733333rem;
         border-radius: 50%;
-        margin-top: 1rem;
+        margin-top: 0.533333rem;
       }
       p.name {
-        margin-top: 0.4rem;
-        line-height: 1rem;
+        margin-top: 0.213333rem;
+        line-height: 0.533333rem;
       }
       p.sub {
         color: #ff3e3e;

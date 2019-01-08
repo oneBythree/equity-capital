@@ -60,25 +60,26 @@ export default {
   background: #fff;
   color: #414141;
   .title {
-    margin: 1.6rem auto 2rem;
+    margin: 0.693333rem auto 1.066667rem;
     text-align: center;
-    font-size: 0.8rem;
+    font-size: 0.426667rem;
     font-weight: bold;
     text-align: center;
   }
   .content {
-    padding: 0 0.9rem;
+    padding: 0 0.48rem;
     height: 70%;
     overflow-y: scroll;
+    font-size: 0.346667rem;
   }
   .icon-close {
     position: absolute;
     display: inline-block;
     left: 50%;
-    bottom: 2rem;
-    width: 1.6rem;
-    height: 1.6rem;
-    margin-left: -0.8rem;
+    bottom: 1.066667rem;
+    width: 0.96rem;
+    height: 0.96rem;
+    margin-left: -0.426667rem;
     background: url("../../assets/images/close-circle-o.png") no-repeat center;
     background-size: cover;
   }

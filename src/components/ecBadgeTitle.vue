@@ -28,22 +28,23 @@ export default {
 .ec-badge-title {
   display: flex;
   align-items: center;
-  margin: 1rem 0 0.8rem 1rem;
+  margin: 0.533333rem 0 0.426667rem 0.533333rem;
 
   em.icon-font {
     display: inline-block;
-    width: 1rem;
-    height: 1rem;
+    width: 0.533333rem;
+    height: 0.533333rem;
     color: #fff;
     background: #ff3e3e;
-    font-size: 0.65rem;
+    font-size: 0.346667rem;
     border-radius: 0.1rem;
     text-align: center;
     font-style: normal;
   }
   .text {
     margin-left: 0.2rem;
-    font-size: 0.7rem;
+    color: #404040;
+    font-size: 0.373333rem;
   }
 }
 </style>

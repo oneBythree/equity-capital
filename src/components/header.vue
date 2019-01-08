@@ -18,7 +18,7 @@
       <span class="ec-icon back"
             @click="handleBack">
       </span>
-      <p class="title">{{$route.meta.title}}</p>
+      <p class="title ellipsis">{{dtitle}}</p>
     </div>
   </header>
 
@@ -40,12 +40,18 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['userInfo']),
+    ...mapGetters(['userInfo', 'navbarTitle']),
     userInfo () {
       return getUserInfo() ? JSON.parse(getUserInfo()) : ''
+    },
+    dtitle () {
+      // console.log(this.navbarTitle)
+      // console.log(this.$route.meta, this.title)
+      return this.navbarTitle ? this.navbarTitle : this.$route.meta.title
     }
   },
   created () {
+    // console.log(this.$route)
     // console.log(this.$route.meta)
     this.getIndex()
   },
@@ -81,15 +87,15 @@ export default {
 <style lang="less" scoped>
 .ec-icon {
   display: inline-block;
-  width: 2rem;
-  height: 2rem;
+  width: 1.066667rem;
+  height: 1.066667rem;
   &.more {
     background: url("../assets/images/more.png") center no-repeat;
-    background-size: 0.55rem 0.55rem;
+    background-size: 0.266667rem 0.266667rem;
   }
   &.back {
     background: url("../assets/images/back.png") center no-repeat;
-    background-size: 0.55rem 0.55rem;
+    background-size: 0.266667rem 0.266667rem;
   }
 }
 
@@ -99,7 +105,7 @@ export default {
   left: 0;
   width: 100%;
   // display: flex;
-  height: 2.7rem;
+  height: 1.28rem;
   background: #ff3e3e;
   z-index: 100;
   .default-wapper {
@@ -107,9 +113,9 @@ export default {
     height: 100%;
     display: flex;
     align-items: center;
-    padding-right: 1.5rem;
+    padding-right: 0.426667rem;
     .ec-icon.more {
-      margin: 0 0.5rem;
+      margin: 0 0.266667rem;
       height: 100%;
     }
   }
@@ -121,16 +127,20 @@ export default {
     height: 100%;
     align-items: center;
     justify-content: center;
-    font-size: 0.7rem;
+    font-size: 0.373333rem;
     color: #fff;
+    &.action {
+      font-size: 0.426667rem;
+    }
     &.action::after {
       content: "";
       position: absolute;
-      left: 15%;
+      left: 50%;
+      margin-left: -0.88rem;
       bottom: -0.05rem;
-      height: 0.2rem;
+      height: 0.106667rem;
       background: #fff;
-      width: 3.3rem;
+      width: 1.76rem;
     }
   }
   .back-wapper {
@@ -138,14 +148,14 @@ export default {
     height: 100%;
     display: flex;
     align-items: center;
-    padding-right: 2rem;
+    padding-right: 1.066667rem;
     .ec-icon.back {
       height: 100%;
     }
     p.title {
       flex: 1;
       color: #fff;
-      font-size: 0.7rem;
+      font-size: 0.426667rem;
       display: inline-flex;
       align-self: center;
       justify-content: center;

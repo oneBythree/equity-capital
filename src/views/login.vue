@@ -205,6 +205,11 @@ export default {
           console.log(result)
           this.getUserInfo(result.data)
         }).catch((err) => {
+          Toast({
+            message: err.message,
+            position: 'bottom',
+            duration: 2000
+          })
           console.log(err)
         })
     },
@@ -215,8 +220,13 @@ export default {
         .then((result) => {
           const userInfo = result.data
           this.$store.commit('loginAction', { userInfo, token, uid })
-          this.$router.push('/vip_broadcast')
+          this.$router.push('/home')
         }).catch((err) => {
+          Toast({
+            message: err.message,
+            position: 'bottom',
+            duration: 2000
+          })
           console.log(err)
         })
     }
@@ -233,37 +243,38 @@ export default {
   height: 100%;
   width: 100%;
   background: #fff;
+  font-size: 0.346667rem;
   .login-form {
-    padding: 8.35rem 0 0 0;
-    margin: 0 1.5rem;
+    padding: 4.453333rem 0 0 0;
+    margin: 0 0.8rem;
     .tel,
     .code {
-      padding-left: 0.9rem;
+      padding-left: 0.48rem;
       flex: 1;
       // white-space: nowrap;
     }
     .code {
-      max-width: 10rem;
+      max-width: 5.333333rem;
     }
     .ec-icon-tel {
       display: inline-block;
-      width: 0.95rem;
-      height: 1.45rem;
+      width: 0.506667rem;
+      height: 0.773333rem;
       background: url("../assets/images/iphone.png") center no-repeat;
-      background-size: 0.5rem 0.75rem;
-      margin-right: 0.8rem;
+      background-size: 0.266667rem 0.4rem;
+      margin-right: 0.426667rem;
     }
     .ec-btn-code {
       display: block;
       white-space: nowrap;
       background: #ff3e3e;
       // width: 3.05rem;
-      height: 1.25rem;
-      line-height: 1.25rem;
+      height: 0.666667rem;
+      line-height: 0.666667rem;
       color: #fff;
-      padding: 0 0.25rem;
-      margin-right: 0.3rem;
-      font-size: 0.6rem;
+      padding: 0 0.133333rem;
+      margin-right: 0.16rem;
+      font-size: 0.32rem;
       border: none;
       &[disabled] {
         background: #7c7c7c;

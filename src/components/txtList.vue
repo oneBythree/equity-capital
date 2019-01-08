@@ -4,31 +4,29 @@
         v-for="(item,key) in listData"
         :key="key"
         @click="handleItem(item)">
-      <div class="left-span"
-           v-if="isLeftIcon">
-        <em :class="item.status | formatStatus"></em>
+      <div class="span-point">
+        {{item.percent}}
       </div>
-      <div class="img-span"
-           v-if="isImg">
-        <img :src="item.img"
-             alt="公司图片"
-             srcset="">
+      <div class="ec-flex-1">
+        <div class="img-span"
+             v-if="isImg && item.thumb">
+          <img :src="item.thumb"
+               alt="公司图片"
+               srcset="">
+        </div>
+        <div class="center-span">
+          <p class="ellipse2 main-title">
+            {{item.title}}
+          </p>
+          <p class="ellipse1 content">
+            {{item.content | filterHTMLTag}}
+          </p>
+          <p class="date">
+            {{item.date}}
+          </p>
+        </div>
       </div>
-      <div class="center-span">
-        <p class="ellipse2 main-title">
-          {{item.title}}
-        </p>
-        <p class="ellipse1 content">
-          {{item.content}}
-        </p>
-        <p class="date">
-          {{item.date}}
-        </p>
-      </div>
-      <div class="span-right"
-           v-if="isRightIcon && item.isBuy>0">
-        <em :class="item.isBuy | formatBuy"></em>
-      </div>
+
     </li>
   </ul>
 </template>
@@ -62,22 +60,14 @@ export default {
     }
   },
   filters: {
-    // 状态图标样式
-    formatStatus (value) {
-      if (value === '1') {
-        return 'ec-icon-status unlook'
-      } else if (value === '2') {
-        return 'ec-icon-status top'
-      } else {
-        return 'ec-icon-status new'
-      }
-    },
-    formatBuy (value) {
-      if (value === '1') {
-        return 'ec-icon-bug come'
-      } else {
-        return 'ec-icon-bug sale'
-      }
+    filterHTMLTag (msg) {
+      let _msg = msg.replace(/<\/?[^>]*>/g, '') // 去除HTML Tag
+      _msg = _msg.replace(/[|]*\n/, '') // 去除行尾空格
+      _msg = _msg.replace(/&npsp;/ig, '') // 去掉npsp
+      // console.log('----------------')
+      // console.log(_msg)
+      // console.log('----------------')
+      return _msg
     }
   },
   data () {
@@ -131,42 +121,46 @@ export default {
 
 //图文详情样式
 ul.ec-list {
-  background: #fff;
-  padding: 0 0.8rem;
+  // background: #fff;
+  margin-top: 0.266667rem;
+  padding: 0 0.266667rem;
+  font-size: 0.373333rem;
   li.item-wapper {
-    padding-top: 0.5rem;
     display: flex;
-    align-items: flex-start;
-    // justify-content: flex-start;
-    div.left-span {
-      display: inline-flex;
-      .ec-icon-new {
-        // margin-top: -0.2rem;
-        vertical-align: top;
-        margin-top: -0.3rem;
-      }
+    align-items: center;
+    .ec-flex-1 {
+      padding-bottom: 0.266667rem;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      background: #fff;
+    }
+    div.span-point {
+      font-size: 0.64rem;
+      margin-right: 0.266667rem;
     }
     div.img-span {
-      width: 1.75rem;
-      margin-left: 0.5rem;
+      width: 0.933333rem;
+      margin-left: 0.266667rem;
       display: inline-flex;
       img {
-        width: 1.75rem;
-        height: 1.75rem;
+        width: 0.933333rem;
+        height: 0.933333rem;
         vertical-align: top;
       }
     }
     div.center-span {
-      margin-left: 0.5rem;
+      margin-left: 0.266667rem;
       flex: 1;
       display: block;
       word-wrap: break-word;
-      color: #111111;
+      color: #414141;
       .main-title {
-        line-height: 1rem;
+        line-height: 0.533333rem;
+        margin-bottom: 0.133333rem;
       }
       .content {
-        line-height: 1rem;
+        line-height: 0.533333rem;
       }
       .date {
         font-size: 0.6rem;
