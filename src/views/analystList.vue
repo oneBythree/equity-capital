@@ -54,7 +54,8 @@ export default {
   methods: {
     clickImg (item) {
       this.$router.push({
-        path: `analyst/${item.id}`
+        path: `analyst/${item.id}`,
+        query: { title: item.name }
       })
     },
     infinite () {

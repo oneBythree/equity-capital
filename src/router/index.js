@@ -153,13 +153,11 @@ const router = new Router({
   routes: [...whiteRoutes, ...adminRoutes]
 })
 
-const whiteList = ['/home', '/login', '/register', '/about', '/scroll']
+const whiteList = ['/home', '/login', '/register',
+  '/about', '/technology', '/convictions', '/notice', '/strategy'
+]
 
 router.beforeEach((to, from, next) => {
-  // const getters = store.getters
-  // console.log(to, 'to')
-  // console.log(from, 'from')
-  // console.log(getUserInfo(), 'getUserInfo')
   if (getUserInfo()) {
     next()
   } else {

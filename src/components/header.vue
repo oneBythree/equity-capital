@@ -120,6 +120,13 @@ export default {
     }
   }
 
+  // @media screen and (min-width: 1240px) {
+  //   .ec-header {
+  //     width: 720px;
+  //     margin: 0 auto;
+  //   }
+  // }
+
   div.tab-item {
     position: relative;
     flex: 1;
@@ -160,6 +167,15 @@ export default {
       align-self: center;
       justify-content: center;
     }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .ec-header {
+    width: 720px;
+    // margin: 0 auto;
+    margin-left: -360px;
+    left: 50%;
   }
 }
 </style>

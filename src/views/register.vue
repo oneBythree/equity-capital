@@ -34,8 +34,8 @@
                name="email">
       </div>
       <div class="form-item ec-border">
-        <label for="code"
-               class="required">*</label>
+        <!-- <label for="code"
+               class="required">*</label> -->
         <input type="text"
                placeholder="注册码"
                v-model="code"
@@ -147,7 +147,8 @@ export default {
       pickerChecked: 'country',
       slots: [],
       timeArr: [{ values: ['一个月', '两个月', '三个月', '半年', '一年', '两年', '三年'] }],
-      countryArr: [{ values: ['中国', '美国', '法国', '德国', '英国', '日本', '其他'] }]
+      // '中国',
+      countryArr: [{ values: ['中国香港', '中国台湾', '美国', '法国', '德国', '英国', '日本', '以上皆不是'] }]
     }
   },
   computed: {
@@ -229,13 +230,13 @@ export default {
         return { falg: false, data }
       }
 
-      if (!code) {
-        Toast({
-          message: '注册码必填',
-          position: 'bottom'
-        })
-        return { falg: false, data }
-      }
+      // if (!code) {
+      //   Toast({
+      //     message: '注册码必填',
+      //     position: 'bottom'
+      //   })
+      //   return { falg: false, data }
+      // }
 
       if (!checked) {
         Toast({

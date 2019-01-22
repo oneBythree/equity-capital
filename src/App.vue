@@ -13,6 +13,25 @@ export default {
     key () {
       return this.$route.name !== undefined ? this.$route.name + new Date() : this.$route + new Date()
     }
+  },
+  created () {
+
+  },
+  mounted () {
+    var doc = window.document
+    var docEl = doc.documentElement// 获取到html
+    var width = window.screen.width || document.body.clientWidth
+    var rem = width > 1240 ? 42 : width / 10
+    // console.log(width)
+    docEl.style.fontSize = rem + 'px'
+    window.onresize = function () {
+      var doc = window.document
+      var docEl = doc.documentElement// 获取到html
+      var width = window.screen.width || document.body.clientWidth
+      var rem = width > 1240 ? width / 10 : 42
+      // console.log(width)
+      docEl.style.fontSize = rem + 'px'
+    }
   }
 }
 </script>
@@ -37,6 +56,15 @@ body {
   // font-family: Source Sans Pro, Helvetica, sans-serif;
   // text-align: center;
   /*background-color: #eee*/
+}
+
+@media screen and (min-width: 1240px) {
+  html,
+  body,
+  #app {
+    width: 720px;
+    margin: 0 auto;
+  }
 }
 
 .ellipse3 {

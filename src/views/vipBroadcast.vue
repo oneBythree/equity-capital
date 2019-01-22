@@ -69,7 +69,7 @@ export default {
     clickTxt (item) {
       this.$router.push({
         path: `stock_detail/${item.id}`,
-        query: { type: 'vip' }
+        query: { type: 'vip', title: item.title }
       })
     },
     vipInfinite () {

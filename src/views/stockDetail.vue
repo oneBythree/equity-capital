@@ -114,6 +114,7 @@ export default {
       defualtImg: require('@/assets/images/Oval.png'),
       data: {},
       query: '',
+      qTitle: '',
       // type: '',
     }
   },
@@ -184,7 +185,12 @@ export default {
     const query = this.$route.query &&
       this.$route.query.hasOwnProperty('type') ? this.$route.query.type : ''
     this.query = query;
+
     const type = query === 'video' ? 2 : 1;
+
+    const title = this.$route.query &&
+      this.$route.query.hasOwnProperty('title') ? this.$route.query.title : ''
+    this.qTitle = title;
     const params = {
       uid: this.uid,
       // debug: 1,
@@ -197,7 +203,8 @@ export default {
       .then((result) => {
         // const { data } = result
         this.data = result.data
-        this.$store.commit('addNavbarTitle', result.data.title)
+        const title = result.data.title ? result.data.title : this.qTitle;
+        this.$store.commit('addNavbarTitle', title);
         setTimeout(() => {
           this.show = true
           Indicator.close()
